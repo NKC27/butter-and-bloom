@@ -1,0 +1,7 @@
+/* Global reset. All of the site's own styling lives inside src/App.jsx,
+   scoped under the .mm class, so this file stays deliberately small. */
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #F5EFF1; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+img, svg { max-width: 100%; }
