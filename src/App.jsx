@@ -173,12 +173,13 @@ const CSS = `
 .mm-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 44px; }
 .mm-opt {
   display: flex; align-items: baseline; gap: 13px; width: 100%; text-align: left;
-  padding: 13px 0; border-bottom: 1px solid var(--verdant-18); color: var(--ink-72);
-  transition: color .35s ease, padding-left .35s cubic-bezier(.16,1,.3,1);
+  min-height: 72px; padding: 14px 16px; border: 1px solid var(--verdant-18); color: var(--ink-72);
+  background: rgba(251,247,248,.34); cursor: pointer;
+  transition: color .35s ease, background .35s ease, border-color .35s ease, transform .35s ease, box-shadow .35s ease;
 }
-.mm-opt:hover { color: var(--ink); padding-left: 8px; }
+.mm-opt:hover { color: var(--ink); background: var(--linen); border-color: var(--verdant-40); transform: translateY(-2px); box-shadow: 0 8px 18px -16px rgba(61,43,51,.8); }
 .mm-opt .mk { width: 13px; height: 13px; flex: none; position: relative; top: 2px; color: var(--verdant-40); transition: color .35s ease, transform .45s cubic-bezier(.16,1,.3,1); }
-.mm-opt[data-on="true"] { color: var(--ink); }
+.mm-opt[data-on="true"] { color: var(--ink); background: var(--linen); border-color: var(--rose); box-shadow: inset 3px 0 0 var(--rose); }
 .mm-opt[data-on="true"] .mk { color: var(--rose); transform: rotate(45deg) scale(1.15); }
 .mm-opt .nm { flex: 1; font-size: 15px; }
 .mm-opt .sub { display: block; color: var(--ink-50); font-size: 12.5px; font-style: italic; }
@@ -907,6 +908,21 @@ function Engraving({
               stroke={edge}
               strokeWidth=".55"
             />
+            <path
+              d={`M ${r.x + 7} ${r.y + 9} H ${r.x + r.w - 7}`}
+              stroke="rgba(255,255,255,.55)"
+              strokeWidth="1"
+              opacity=".7"
+            />
+            {[0.22, 0.5, 0.78].map((f, k) => (
+              <path
+                key={`panel-${k}`}
+                d={`M ${r.x + r.w * f} ${r.y + 15} V ${r.y + r.h - 10}`}
+                stroke={edge}
+                strokeWidth=".35"
+                opacity=".5"
+              />
+            ))}
 
             {finish === 'seminaked' &&
               [0.36, 0.68].map((f, k) => (
@@ -1299,7 +1315,7 @@ export default function App() {
   };
 
   const Opt = ({ on, onClick, name, sub, price }) => (
-    <button className="mm-opt" data-on={on} onClick={onClick}>
+    <button className="mm-opt" data-on={on} aria-pressed={on} onClick={onClick}>
       <Petal className="mk" />
       <span className="nm">
         {name}
@@ -1409,7 +1425,7 @@ export default function App() {
               <div className="mm-plate">
                 <div style={{ padding: '18px 8px 0' }}>
                   <Engraving
-                    tiers={[8, 10, 12]}
+                    tiers={[12, 10, 8, 6]}
                     colour="#FBF7F8"
                     accent="#E2A9B3"
                     decor={['sugarflowers', 'lace', 'goldleaf']}
