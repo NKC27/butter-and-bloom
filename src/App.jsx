@@ -1522,7 +1522,7 @@ export default function App() {
                   <Cartouche>
                     <div className="mm-plate">
                       <Engraving
-                        tiers={[...c.tiers].reverse()}
+                        tiers={c.tiers}
                         colour={c.colour}
                         accent={c.accent}
                         decor={c.decor}
@@ -2036,7 +2036,7 @@ export default function App() {
                 <div className="mm-plate">
                   <div style={{ padding: '16px 8px 0' }}>
                     <Engraving
-                      tiers={[...tiers].reverse()}
+                      tiers={tiers}
                       colour={hexOf(colour)}
                       accent={hexOf(accent)}
                       decor={decor}
@@ -3202,7 +3202,7 @@ function PlateModal({ item, close }) {
             <Cartouche>
               <div className="mm-plate">
                 <Engraving
-                  tiers={[...item.tiers].reverse()}
+                  tiers={item.tiers}
                   colour={item.colour}
                   accent={item.accent}
                   decor={item.decor}
